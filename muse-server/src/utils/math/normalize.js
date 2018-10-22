@@ -1,0 +1,1 @@
+module.exports = v => (v / 16384).toFixed(2) + 'g'
