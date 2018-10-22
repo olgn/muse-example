@@ -1,0 +1,30 @@
+{
+  "name": "muse-server",
+  "version": "1.0.0",
+  "description": "Server for Muse EEG headset data",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "start": "node ./index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/olgn/muse-server.git"
+  },
+  "keywords": [
+    "muse",
+    "eeg"
+  ],
+  "author": "Teal Hobson-Lowther",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/olgn/muse-server/issues"
+  },
+  "homepage": "https://github.com/olgn/muse-server#readme",
+  "dependencies": {
+    "bleat": "^0.1.8",
+    "muse-js": "https://github.com/urish/muse-js",
+    "noble": "^1.9.1",
+    "text-encoding": "^0.7.0"
+  }
+}
