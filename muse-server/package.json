@@ -25,6 +25,7 @@
     "bleat": "^0.1.8",
     "muse-js": "https://github.com/urish/muse-js",
     "noble": "^1.9.1",
+    "osc": "^2.2.4",
     "text-encoding": "^0.7.0"
   }
 }
