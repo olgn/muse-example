@@ -23,6 +23,7 @@
   "homepage": "https://github.com/olgn/muse-server#readme",
   "dependencies": {
     "bleat": "^0.1.8",
+    "jetty": "^0.2.1",
     "muse-js": "https://github.com/urish/muse-js",
     "noble": "^1.9.1",
     "osc": "^2.2.4",

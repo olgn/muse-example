@@ -5,6 +5,8 @@ const {
   zipSamples,
   channelNames,
 } = require('muse-js')
+const log = new (require('jetty'))(process.stdout)
+const colors = require('./utils/colors')
 
 async function connect() {
   let device = await bluetooth.requestDevice({
@@ -12,12 +14,10 @@ async function connect() {
   })
   const gatt = await device.gatt.connect()
   const client = new MuseClient()
-
   await client.connect(gatt)
-  client.controlResponses.subscribe(x => console.log('Response:', x))
   await client.start()
 
-  console.log('MUSE: SUCCESS | Muse headband is connected and broadcasting.')
+  log.rgb(colors.g).text('MUSE: SUCCESS | Muse headband is connected and broadcasting.\n')
   return client
 }
 

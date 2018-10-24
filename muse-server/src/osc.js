@@ -1,4 +1,6 @@
 const osc = require('osc')
+const Jetty = require('jetty')
+const logger = require('./utils/logger')
 
 const connect = () => {
   return new Promise((resolve, reject) => {
@@ -10,18 +12,13 @@ const connect = () => {
       })
 
       client.on('ready', () => {
-        console.log(
-          'OSC: SUCCESS | OSC port is connected and ready for broadcasting.',
-        )
-      })
-      client.on('message', message => {
-        console.log(
-          'OSC: BROADCAST | OSC port received the following message:',
-          message,
-        )
+        logger.log('g',
+            'OSC: SUCCESS | OSC port is connected and ready for broadcasting.',
+          )
       })
       client.on('error', err => {
-        console.log('OSC: ERROR | Error in the OSC port:', err)
+        logger.log('r', 'OSC: ERROR | Error in the OSC port:')
+        logger.log('w', err)
       })
       client.open()
       resolve(client)
@@ -44,7 +41,7 @@ const test = client => {
       })
       resolve()
     } catch (err) {
-        reject(err)
+      reject(err)
     }
   })
 }

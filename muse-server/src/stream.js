@@ -2,6 +2,7 @@ const noble = require('noble')
 const osc = require('./osc')
 const muse = require('./muse')
 const utils = require('./utils')
+const logger = require('./utils/logger')
 
 osc
   .connect()
@@ -14,36 +15,42 @@ osc
             muse
               .connect()
               .then(museClient => {
+                logger.log('b', 'MUSE: INFO: Broadcasting messages over OSC to port 5000.')
                 museClient.eegReadings.subscribe(reading => {
+                  // send osc message
                   osc.broadcast(oscClient, utils.oscMessage.eeg(reading))
                 })
                 museClient.accelerometerData.subscribe(reading => {
+                  // send osc message
                   osc.broadcast(oscClient, utils.oscMessage.acc(reading))
                 })
                 museClient.telemetryData.subscribe(reading => {
+                  // send osc message
                   osc.broadcast(oscClient, utils.oscMessage.tel(reading))
                 })
               })
               .catch(err => {
-                console.log(
-                  'MUSE: ERROR | There was an error connecting to the Muse headband.',
+                logger.log(
+                  'r',
+                  'MUSE: ERROR | There was an error connecting to the Muse headband:',
                 )
-                console.log('MUSE: ERROR | ', err)
+                logger.log('w', err)
                 process.exit()
               })
           }
         })
       })
       .catch(err => {
-        console.log(
+        logger.log(
+          'r',
           'OSC: ERROR | There was an error with the test packet broadcast on the OSC Port.',
         )
-        console.log(err)
+        logger.log('w', err)
         process.exit()
       }),
   )
   .catch(err => {
-    console.log('OSC: ERROR | There was an error connecting to the OSC Port.')
-    console.log(err)
+    logger.log('r', 'OSC: ERROR | There was an error connecting to the OSC Port.')
+    logger.log('w', err)
     process.exit()
   })
